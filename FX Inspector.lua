@@ -1,5 +1,5 @@
 -- FX Inspector
--- Version 1.0.0
+-- Version 1.0.1
 
 if not reaper.ImGui_CreateContext then
     reaper.ShowMessageBox(
@@ -952,6 +952,11 @@ local function loop()
 
     reaper.ImGui_End(ctx)
 
+    -- Close FX Inspector when Escape is pressed.
+    if reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), false) then
+        open = false
+    end
+
     if open then
         reaper.defer(loop)
     end
@@ -962,4 +967,3 @@ reaper.ImGui_SetNextWindowSize(
 )
 
 loop()
-
